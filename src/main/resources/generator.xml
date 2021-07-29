@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--    <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+    <!--    <properties resource="db.properties"></properties>-->
+    <!--    数据库连接-->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <plugin type="com.common.adapter.MyLombokPlugin">
+            <property name="hasLombok" value="true"/>
+        </plugin>
+
+        <commentGenerator type="com.common.settings.MyCommentGenerator">
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://mysql-uat.boxuegu.com:3307/crm"
+                        userId="crm"
+                        password="uatdjasiasfds">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <!--java类型解析器，具体看文档-->
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+
+
+
+        <!--指定javaBean生成策略-->
+        <javaModelGenerator targetPackage="com.lsx.domain" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+
+        </javaModelGenerator>
+        <!--sql映射文件策略-->
+        <sqlMapGenerator targetPackage="com.lsx.sql"
+                         targetProject="src\main\java">
+
+            <property name="enableSubPackages" value="true" />
+
+        </sqlMapGenerator>
+        <!--指定Mapper接口所在位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lsx.dao"  targetProject="src\main\java">
+
+            <property name="enableSubPackages" value="true" />
+            <property name="suppressAllComments" value="false" />
+
+        </javaClientGenerator>
+
+
+        <!--指定逆向生成的数据库的表,根据表创建javaBean-->
+        <table tableName="t_withdraw"
+               domainObjectName="Withdraw"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>
